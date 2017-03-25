@@ -1,28 +1,39 @@
 {
-
-  "manifest_version": 2,
-  "name": "Beastify",
-  "version": "1.0",
-
-  "description": "Makes animals popup on button click",
-
-  "icons": {
-    "48": "icons/beasts-48.png"
+  "name": "Hackext",
+  "version": "0.1",
+  "background": {
+    "scripts": ["background-script.js"]
   },
-
-  "permissions": [
-    "activeTab"
-  ],
-
-  "browser_action": {
-    "default_icon": "icons/beasts-32.png",
-    "default_title": "Beastify",
-    "default_popup": "popup/choose_beast.html"
-  },
-
-  "web_accessible_resources": [
-    "beasts/frog.jpg",
-    "beasts/turtle.jpg",
-    "beasts/snake.jpg"
-  ]
-}
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["/content_scripts/content_script.js"]
+    }],
+    "browser_action": {
+      "default_title": "Memory overview",
+      "default_icon": {
+        "32": "icons/beasts-32.png",
+        "48": "icons/beasts-48.png",        
+      },
+    },
+    "commands": {
+      "openOverview": {
+        "suggested_key": {
+          "default": "Ctrl+Y"
+        },
+        "description": "Open your memory overview"
+      }
+    },
+    "applications": {
+      "gecko": {
+        "id": "webmemex-extension@webmemex.org"
+      }
+    },
+    "permissions": [
+      "<all_urls>",
+      "history",
+      "tabs",
+      "bookmarks",
+      "webNavigation"
+    ],
+    "manifest_version": 2
+  }
